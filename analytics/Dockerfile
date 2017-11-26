@@ -1,5 +1,8 @@
 FROM ubuntu:14.04
 
+ENV http_proxy="http://192.168.5.8:3128"
+ENV https_proxy="https://192.168.5.8:3128"
+
 RUN mkdir -p /root
 WORKDIR /root
 

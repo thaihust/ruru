@@ -1,5 +1,8 @@
 FROM node:argon
 
+ENV http_proxy="http://192.168.5.8:3128"
+ENV https_proxy="https://192.168.5.8:3128"
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
@@ -7,7 +10,10 @@ RUN apt-get update
 RUN apt-get install -y libtool pkg-config build-essential autoconf automake
 RUN apt-get install -y libzmq3-dev
 
+RUN git config --global url.https://github.com/.insteadOf git://github.com/
+
 COPY package.json /usr/src/app/
+RUN npm config set proxy "http://192.168.5.8:3128/"
 RUN npm install
 
 # Bundle app source

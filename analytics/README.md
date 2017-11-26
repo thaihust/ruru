@@ -33,11 +33,11 @@ You can get a free IP2Location database from here: http://lite.ip2location.com/d
 
 Start a command similar to this (change path to an empty directory where data will be stored)
 
-    sudo docker run -d -p 127.0.0.18086:8086 --name influxcontainer -v /home/rcziva/ruru/influxdb:/var/lib/influxdb influxdb
+    sudo docker run -d -p 127.0.0.1:8086:8086 --name influxdb -v /root/ruru/influxdb:/var/lib/influxdb influxdb
 
 Set the retention policy for Influx
 
-    sudo docker exec -ti influxcontainer influx 
+    sudo docker exec -ti influxdb influx 
     > create database rtt
     > alter retention policy autogen on rtt duration 520w 
 
@@ -70,5 +70,5 @@ If you see this output (have a look with docker logs), the analytics is running:
 
 With Grafana, you can browse the Influx DB from a web browser. You can start it in a container with a similar command to have it listening on port 4000:
 
-    docker run -d -p 4000:3000 -v /home/rcziva/ruru/grafana:/var/lib/grafana -e "GF_SECURITY_ADMIN_PASSWORD=banana" grafana/grafana
+    docker run -d -p 4000:3000 -v /root/ruru/grafana:/var/lib/grafana -e "GF_SECURITY_ADMIN_PASSWORD=banana" grafana/grafana
 
