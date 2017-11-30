@@ -26,7 +26,20 @@ function install_sqlite3 {
     sudo apt-get update && sudo apt-get -y install sqlite3
 }
 
+function unzip_ip2db {
+    cp ../ip2_databases/* ../analytics/data/ 
+    cd ../analytics/data/
+    unzip IP2LOCATION-LITE-ASN.CSV.ZIP
+    unzip IP2LOCATION-LITE-DB5.BIN.ZIP
+    unzip IP2PROXY-LITE-PX4.CSV.ZIP
+    mv IP2LOCATION-LITE-ASN.CSV asn.csv
+    mv IP2LOCATION-LITE-DB5.BIN ip2location-db5.bin
+    mv IP2PROXY-LITE-PX4.CSV proxy.csv
+    rm -f *.TXT
+}
+
 function create_analytics_databases {
+    unzip_ip2db
     cd ../analytics/data/
     rm -f asn.db proxy.db
     touch asn.db proxy.db
