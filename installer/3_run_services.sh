@@ -29,7 +29,4 @@ function main {
    start_dpdk_latency
 }
 
-export DPDK_CORE_MASK=f
-export DPDK_NUM_MEM_CHANNELS=4
-export DPDK_LATENCY_PORT_MASK=1
-export DPDK_LATENCY_INTERVAL=20
+main
